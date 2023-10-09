@@ -1,0 +1,118 @@
+<%- include('comman/header')%>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<div class="container">
+  <div class="balance-box">
+    <h2 style="color: red;font-size: larger;font-size: 30px;"><i class="fas fa-rupee-sign"></i>
+        <%= rechargeAmount %></h2>
+    <p>Your Balance</p>
+  </div>
+  <div class="recharge-box">
+    <h2>Recharge <br>Withdrwal</h2>
+    <a href="/recharge"><button class="recharge-button"><i class="fa fa-credit-card" style="text-decoration: none;color: rgb(255, 255, 255);"></i> Recharge Now</button></a>
+     <a href="/Withdrwal"><button class="recharge-button" style="background-color: fuchsia;"><i class="fa fa-credit-card"style="text-decoration: none;color: rgb(255, 255, 255);"></i>Withdrwal Now </button></a>
+  </div>
+</div>
+
+<div class="center-boxes">
+  <div class="center-bo">
+    <i class="fa fa-key"></i>
+    <p>Change Password</p>
+  </div>
+  <div class="center-bo">
+    <a href="/logout"><i class="fa fa-sign-out-alt"></i></a>
+    <p class="logout"><a href="/logout">Logout</a></p>
+  </div>
+</div>
+
+<style>
+  .center-box a{
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    
+  }
+   .center-bo:hover{
+    background-color: rgb(205, 205, 205);
+  }
+    body{
+      background-color: #967aa1;
+    }
+    .recharge-box h2{
+      font-size: 1.1rem;
+      text-align: center;
+    }
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .balncestyle{
+    color: rgb(255, 0, 0);
+    font-size: larger;
+  }
+  .balance-box,
+  .recharge-box {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: calc(50% - 20px); /* Adjust for spacing */
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .balance-box h2,
+  .recharge-box h2 {
+    margin: 0;
+    color: #333;
+  }
+
+  .recharge-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .center-boxes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* width: 50%; */
+    /* height: 200px; */
+    color: black;
+  }
+  .center-bo{
+    color: black;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    width: 100px;
+    height: 70px;
+    background-color: #f0f0f0;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  cursor: pointer;
+  margin: 5px;
+  }
+  .center-bo a{
+    color: black;
+  }
+  .center-bo p a{
+    text-decoration: none;
+    color: black;
+  }
+
+  .fa {
+    font-size: 24px;
+  }
+</style>
+
+<%- include('comman/footer')%>

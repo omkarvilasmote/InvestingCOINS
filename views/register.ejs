@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registration</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,500;0,600;0,800;1,900&display=swap"
+        rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="/styles/style.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      /* background-color: rgb(243, 143, 218); */
+      background-color: #967aa1;
+    }
+
+    .container {
+      background-color: #192a51;
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      border-radius: 8px;
+      /* border: 2px solid; */
+      /* background-color: #fff; */
+      box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    h1 {
+      color: white;
+      margin-bottom: 10px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    input {
+      /* margin: 10px 0; */
+      padding: 5px;
+      width: 95%;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #sendOtpButton{
+      margin: -7px;
+    }
+    a {
+      margin-top: 10px;
+      text-decoration: none;
+      color: #0056b3;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <form id="registrationForm" method="POST" action="/verify-otp">
+      <h1>Register</h1>
+      <input type="text" name="fullName" placeholder="Full Name" required>
+      <br>
+      <label for="" id="OTP-sendmessage"></label>
+      <input type="tel" name="phoneNumber" id="phoneNumber" placeholder="Phone Number" value="+91" required>
+      <button id="sendOtpButton">Send OTP</button>      
+      <input type="number" name="otp" placeholder="OTP" required>
+      <br>
+      <label for="" id="PassLOng"></label>
+      <input type="password" name="password" id="password" placeholder="Password" required>
+      <label for="" id="Passwordchecking"></label>
+      <input type="password" name="confirmPassword" id="rePassword" placeholder="Confirm Password" required>
+      <button type="submit">Register</button>
+    </form>
+    <br>
+    <a href="/login">I already have an account</a>
+  </div>
+  <script>
+        document.getElementById("registrationForm").addEventListener("submit", function(event) {
+        const phoneNumber = document.getElementById("phoneNumber").value;
+        const password = document.getElementById("password").value;
+        const rePassword = document.getElementById("rePassword").value;
+        const Passwordchecking = document.getElementById("Passwordchecking")
+        const PassLOng = document.getElementById('PassLOng');
+ 
+    
+        if (password.length < 6) {
+          PassLOng.style.color="red"
+          PassLOng.textContent = "Password must be at least 6 characters long"
+        event.preventDefault();
+        return;
+    }
+
+        if (password !== rePassword) {
+          Passwordchecking.style.color="red"
+          Passwordchecking.textContent = "Passwords do not match"
+            event.preventDefault();
+            return;
+        }
+    });
+    </script>
+
+<script>
+  document.getElementById("sendOtpButton").addEventListener("click", async function(event) {
+  event.preventDefault();
+  const phoneNumber = document.getElementById("phoneNumber").value;
+  const OTPsendmessage = document.getElementById('OTP-sendmessage');
+
+  // Validate phone number format
+  if (!isValidPhoneNumber(phoneNumber)) {
+    OTPsendmessage.style.color="red"
+      OTPsendmessage.textContent = "Invalid phone number format";
+    return;
+  }
+
+  try {
+    const response = await fetch('/send-otp', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: `phoneNumber=${encodeURIComponent(phoneNumber)}` // Updated line
+    });
+
+    if (response.ok) {
+      OTPsendmessage.style.color="green"
+      OTPsendmessage.textContent = "OTP sent successfully";
+    } else {
+      OTPsendmessage.style.color="red"
+      OTPsendmessage.textContent = "Failed to send OTP";
+    }
+  } catch (error) {
+    console.error(error);
+    alert('An error occurred');
+  }
+});
+
+function isValidPhoneNumber(phoneNumber) {
+  return /^\+[1-9]\d{1,14}$/.test(phoneNumber);
+}
+
+
+</script>
+</body>
+</html>

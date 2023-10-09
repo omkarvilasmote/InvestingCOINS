@@ -1,0 +1,64 @@
+<%- include('comman/header')%>
+
+<div class="product-container">
+  <% anotherProductCollection.forEach((product, index) => { %>
+    <div class="product-box">
+      <h3><%= product.Name %></h3>
+      <p>Product ID: <%= product.ProductID %></p>
+      <p>Days: <%= product.Days %></p>
+      <p>Earning: <%= product.Ernning %></p>
+      <p>Price: <%= product.price %></p>
+      <p class="important-data">StartingDay: <%= startingDataShow[index].StartingDate %></p>
+      <p class="important-data">EndingDay: <%= startingDataShow[index].EndingDate %></p>
+    </div>
+  <% }); %>
+</div>
+
+<style>
+  body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #967aa1;
+}
+
+.product-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1200px; /* Adjust the width as needed */
+  padding: 20px;
+}
+
+.product-box {
+  width: calc(33.33% - 30px); /* Adjust the width and margin as needed */
+  background-color: #f0f0f0;
+  border: 1px solid #000000;
+  padding: 20px;
+  margin-bottom: 25px;
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+}
+
+.product-box h3 {
+  margin: 0;
+  color: #333;
+}
+
+.important-data {
+  margin: 10px 0;
+  color: #ff0202; /* Highlighted text color */
+  font-weight: bold;
+}
+
+/* Media query for screens with a maximum width of 768px (typical for phones) */
+@media (max-width: 768px) {
+  .product-box {
+    width: 100%; /* Display as a single column on smaller screens */
+    margin: 0; /* Remove margin between boxes */
+  }
+}
+
+</style>
+
+<%- include('comman/footer')%>

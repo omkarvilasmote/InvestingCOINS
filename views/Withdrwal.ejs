@@ -1,0 +1,112 @@
+<%- include('comman/header')%>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Withdrawal Page</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #967aa1;
+            /* margin: 0; */
+            
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 400px;
+            background-color: #192a51;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: white; 
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            font-weight: bold;
+            color: white;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #2980b9; /* Button color */
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #2471a3; /* Hover color */
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Withdrawal</h1>
+        <form action="/Withdrwal" method="post">
+            <label for="phoneNumber">Your Phone Number: </label>
+            <input type="number" id="phoneNumber" name="phoneNumber" value="<%= userPhoneNumber %>" readonly required>
+            <br>
+            <label for="upiId">Your UPI ID:</label>
+            <input type="text" id="upiId" name="upiId" required>
+            <br>
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" name="amount" min="500" required>
+            <p id="errorMessage" class="error-message" style="display: none;">Withdrawal amount must be at least 500.</p>
+            <br>
+            <button type="submit">Submit Withdrawal</button>
+        </form>
+    </div>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;800;900&display=swap" rel="stylesheet">
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const withdrawalForm = document.getElementById('withdrawalForm');
+            const amountInput = document.getElementById('amount');
+            const errorMessage = document.getElementById('errorMessage');
+
+            withdrawalForm.addEventListener('submit', function (event) {
+                const amount = parseInt(amountInput.value);
+                if (amount < 500) {
+                    event.preventDefault(); // Prevent form submission
+                    errorMessage.style.display = 'block';
+                }
+            });
+
+            amountInput.addEventListener('input', function () {
+                errorMessage.style.display = 'none'; // Hide the error message
+            });
+        });
+    </script>
+</body>
+</html>
+<%- include('comman/footer')%>
